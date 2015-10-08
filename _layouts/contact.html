@@ -1,0 +1,30 @@
+---
+layout: default
+---
+<div class="contact">
+
+    <header class="contact-header">
+        <h1 class="contact-title">{{ page.title }}</h1>
+    </header>
+
+    <article class="contact-content">
+        {{ content }}
+    </article>
+
+    <form action="//formspree.io/contact@fraserreed.com" class="form" method="POST">
+        <input type="hidden" name="_subject" value="[fraserreed.com] Contact Form"/>
+        <label for="source" class="gotcha">Source</label>
+        <input type="text" id="source" name="_gotcha" class="gotcha"/>
+
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="_replyto" placeholder="hello@example.com" required>
+        <label for="message">Message</label>
+        <textarea id="message" name="message"></textarea>
+
+        <input type="submit" class="submit-button" value="Submit"/>
+    </form>
+
+
+</div>

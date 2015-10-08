@@ -1,0 +1,58 @@
+<footer class="site-footer">
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col  footer-col-1">
+        <ul class="contact-list">
+          <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+          <li>Copyright &copy; 2015 {{ site.title }}</li>
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          {% if site.github_username %}
+          <li>
+            <a href="https://github.com/{{ site.github_username }}">
+
+              <img src="/css/logos/github.svg" width="25px" height="24px" alt="GitHub">
+
+              <span class="username">{{ site.github_username }}</span>
+            </a>
+          </li>
+          {% endif %}
+
+          {% if site.twitter_username %}
+          <li>
+            <a href="https://twitter.com/{{ site.twitter_username }}">
+
+              <img src="/css/logos/twitter.svg" width="25px" height="24px" alt="Twitter">
+
+              <span class="username">{{ site.twitter_username }}</span>
+            </a>
+          </li>
+          {% endif %}
+
+          {% if site.linkedin_username %}
+          <li>
+            <a href="https://www.linkedin.com/in/{{ site.linkedin_username }}">
+
+              <img src="/css/logos/linkedin.svg" width="25px" height="24px" alt="LinkedIn">
+
+              <span class="username">{{ site.linkedin_username }}</span>
+            </a>
+          </li>
+          {% endif %}
+
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-3">
+        <p class="text">{{ site.description }}</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
