@@ -209,3 +209,12 @@ pre {
         }
     }
 }
+
+.brand-logo {
+
+    > svg {
+      display:block;
+      height: 200px;
+      margin-bottom: -175px;
+    }
+}
