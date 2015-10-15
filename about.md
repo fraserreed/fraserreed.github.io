@@ -8,9 +8,25 @@ I'm Fraser Reed and I live in Ottawa, Ontario, Canada.
 
 During the day, I work at [WorkshopX](http://workshopx.com), a technology incubator that has built these great brands:
 
-<div class="brand-logo">
-    <svg width="120px" viewBox="0 0 2400 1200" xmlns="http://www.w3.org/2000/svg">
-        <path fill="black" d="M0 952q0 84 56 140t144 56q40 0 74 -14t46 -30l16 -12l-32 -68q-40 44 -104 44q-108 0 -108 -116q0 -112 112 -112q32 0 60 12t40 24l12 12l28 -68q-48 -60 -144 -60q-88 0 -144 54t-56 138zM364 764v376h92v-60q24 32 52 48q28 20 60 20q12 0 44 -8l-16 -88 q-20 12 -40 12q-44 0 -72 -40q-28 -48 -28 -124v-136h-92zM604 872q0 60 44 92t116 32h60v16q0 28 -16 44q-16 12 -48 12q-52 0 -64 -44l-80 20q16 48 48 72q44 32 96 32q156 0 156 -160v-224h-76l-8 48q-40 -52 -116 -52q-52 0 -80 28q-32 28 -32 84zM700 876q0 -12 8 -28 q16 -8 32 -8q36 0 60 20q24 24 24 56v8h-60q-64 0 -64 -48zM936 1060v80h48v96l92 56v-152h168q-16 -12 -40 -36l-28 -44h-100v-160q0 -36 12 -48t36 -12t36 8l24 -76q-32 -12 -64 -12q-64 0 -100 36q-36 28 -36 100v164h-48zM1192 952q0 36 4 56q4 24 20 52q24 32 36 44 q20 20 52 32t68 12q32 0 64 -12q20 -8 52 -32q24 -24 32 -44q16 -32 20 -48q8 -32 8 -52v-36h-260q0 -36 24 -60t64 -24q32 0 52 12q20 8 40 44l72 -28q-48 -108 -168 -108q-36 0 -68 12q-40 16 -52 28l-36 48q-16 32 -20 52q-4 16 -4 52zM1288 996h164q-4 28 -28 52 q-20 20 -52 20q-28 0 -56 -20q-24 -32 -28 -52zM1576 952q0 96 44 140q44 56 128 56q20 0 52 -12q16 -8 36 -28v184h92v-528h-92v40q-4 -12 -32 -32q-24 -12 -56 -12q-88 0 -128 52q-44 48 -44 140zM1672 952q0 -56 24 -84t64 -28q36 0 60 28t24 84t-24 84q-24 32 -60 32 q-40 0 -64 -32q-24 -28 -24 -84zM1956 764v96h92v-96h-92z" 
-        transform="scale(-1, 1) rotate(180)"/>
-    </svg>
-</div>
+<ul class="clients">
+    <li>
+        <a href="http://www.popkey.co" target="_blank">
+            <i class="product-logo icon-popkey"></i>
+        </a>
+    </li>
+    <li>
+        <a href="https://crated.com" target="_blank">
+            <i class="product-logo icon-crated"></i>
+        </a>
+    </li>
+    <li>
+        <a href="http://www.canvaspop.com" target="_blank">
+            <i class="product-logo icon-canvaspop"></i>
+        </a>
+    </li>
+    <li>
+        <a href="http://www.dna11.com" target="_blank">
+            <i class="product-logo icon-dna11"></i>
+        </a>
+    </li>
+</ul>
