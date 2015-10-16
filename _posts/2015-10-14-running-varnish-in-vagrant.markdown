@@ -72,16 +72,16 @@ Next add the deb package from Varnish.
 vagrant@fraser-vagrant:~ $ sudo echo "deb https://repo.varnish-cache.org/ubuntu/ trusty varnish-4.1" | sudo tee -a /etc/apt/sources.list.d/varnish-cache.list
 
 deb https://repo.varnish-cache.org/ubuntu/ trusty varnish-4.1
-vagrant@fraser-vagrant:~$
+vagrant@fraser-vagrant:~ $
 {% endhighlight %}
 
 Finally install the varnish package.
 
 {% highlight sh %}
-vagrant@fraser-vagrant:~$ sudo apt-get update
+vagrant@fraser-vagrant:~ $ sudo apt-get update
 ....
 Reading package lists... Done
-vagrant@fraser-vagrant:~$ sudo apt-get install varnish
+vagrant@fraser-vagrant:~ $ sudo apt-get install varnish
 Reading package lists... Done
 Building dependency tree
 Reading state information... Done
@@ -113,7 +113,7 @@ Setting up varnish (4.1.0-1~trusty) ...
  * Starting HTTP accelerator varnishd                                                                                                           [ OK ]
 Processing triggers for libc-bin (2.19-0ubuntu6.6) ...
 Processing triggers for ureadahead (0.100.0-16) ...
-vagrant@fraser-vagrant:~$ 
+vagrant@fraser-vagrant:~ $ 
 {% endhighlight %}
 
 You will see from the `* Starting HTTP accelerator varnishd` line that the Varnish service has been started.
@@ -123,7 +123,7 @@ error (assuming your default web app responds on port 80 and not port 8080 - Var
 default).  If you open `/etc/varnish/default.vcl` you will see the default settings:
 
 {% highlight sh %}
-vagrant@fraser-vagrant:~$ sudo cat /etc/varnish/default.vcl
+vagrant@fraser-vagrant:~ $ sudo cat /etc/varnish/default.vcl
 #
 # This is an example VCL file for Varnish.
 vcl 4.0;
@@ -138,10 +138,10 @@ backend default {
 Update this file to use the correct port and restart Varnish.
 
 {% highlight sh %}
-vagrant@fraser-vagrant:~$ sudo service varnish restart
+vagrant@fraser-vagrant:~ $ sudo service varnish restart
  * Stopping HTTP accelerator varnishd                                                                                                           [ OK ]
  * Starting HTTP accelerator varnishd
-vagrant@fraser-vagrant:~$ 
+vagrant@fraser-vagrant:~ $ 
 {% endhighlight %}
 
 Reload your web browser, and you should see the root page as expected.
@@ -157,7 +157,7 @@ The second is by enabling `varnishlog` inside your Vagrant box, which is quite v
 there is to know about the request.
 
 {% highlight sh %}
-vagrant@fraser-vagrant:~$ varnishlog
+vagrant@fraser-vagrant:~ $ varnishlog
 *   << BeReq    >> 65555
 -   Begin          bereq 65554 pass
 -   Timestamp      Start: 1444962247.992826 0.000000 0.000000
