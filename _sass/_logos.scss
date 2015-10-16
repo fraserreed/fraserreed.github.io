@@ -99,7 +99,22 @@ ul.clients {
   }
 }
 
+.brands {
+    width: 50%;
+    margin: 0 auto;
+
+    .logo {
+      height: 64px;
+      padding: 20px 15px;
+    }
+}
+
 @media only screen and (max-width: 1100px) {
+  .brands {
+    width: 100%;
+    margin: 0;
+  }
+
   ul.clients li {
     margin: 0 15px !important;
 
@@ -110,6 +125,11 @@ ul.clients {
 }
 
 @media only screen and (max-height: 620px) {
+  .brands {
+    width: 100%;
+    margin: 0;
+  }
+
   ul.clients {
     position: relative !important;
     bottom: auto !important;
@@ -118,6 +138,11 @@ ul.clients {
 }
 
 @media only screen and (max-width: 800px) {
+  .brands {
+    width: 100%;
+    margin: 0;
+  }
+
   ul.clients {
     bottom: 50px !important;
     li {
@@ -157,4 +182,13 @@ ul.clients {
     width: 100%;
     text-align: center;
   }
+
+  .brands {
+    width: 100%;
+
+    .logo {
+      padding: 10px 5px;
+    }
+  }
+
 }
