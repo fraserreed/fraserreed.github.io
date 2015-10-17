@@ -4,16 +4,8 @@ title:  "Setting up and running Varnish in Vagrant"
 summary: 
 date:   2015-10-14 18:54:40
 categories: varnish
+comments: true
 ---
-
-<div class="brands">
-    <a href="https://www.vagrantup.com" target="_blank">
-        <img src="/css/images/logo-vagrant.png" class="logo"/>
-    </a>
-    <a href="https://www.varnish-cache.org" target="_blank">
-        <img src="/css/images/logo-varnish.png" class="logo"/>
-    </a>
-</div>
 
 If your production environment is fronted by a [Varnish][varnish] caching layer, there's a good chance
 your development environment isn't.  This can introduce a number of unanticipated consequences when deploying new code to your
@@ -22,6 +14,8 @@ production environment that interacts with Varnish, so it's best to have the cac
 This post will cover the steps required to install and configure Varnish 4 in a local [Vagrant][vagrant] environment, 
 running a vanilla Ubuntu 14.04 install.  If you don't already have a Vagrant box set up, follow the instructions in 
 their [getting started guide][vagrant-getting-started].
+
+<!--more-->
 
 # Setting Varnish up manually
 

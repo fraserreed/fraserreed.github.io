@@ -13,3 +13,4 @@ linkedin_username: fraserreed
 
 # Build settings
 markdown: kramdown
+excerpt_separator: <!--more-->
