@@ -13,6 +13,8 @@ layout: default
 
     <form action="//formspree.io/contact@fraserreed.com" class="form" method="POST">
         <input type="hidden" name="_subject" value="[fraserreed.com] Contact Form"/>
+        <input type="hidden" name="_next" value="{{ '/contact/thanks/' | prepend: site.baseurl | prepend: site.url }}" />
+
         <label for="source" class="gotcha">Source</label>
         <input type="text" id="source" name="_gotcha" class="gotcha"/>
 
