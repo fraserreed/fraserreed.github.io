@@ -2,13 +2,13 @@
 layout: post
 title:  "Database Testing with PHPUnit"
 summary: 
-date:   2015-11-13 13:28:00
+date:   2016-04-06 13:28:00
 categories: phpunit
 comments: true
 ---
 
 In this post, you will learn how to set up PHPUnit to test the database layer of your application.  Unit tests are usually
-focused on testing object models, but they can also be used to test interactions with the database to prevent against
+focused on testing object models, but they can also be used to test interactions with the database to prevent
 regressions in data persistence.  If you have a complex application that involves a database, it is very important to 
 validate that it is working properly so you can be more confident in your deploys.
 
@@ -378,7 +378,7 @@ class BookMapperTest extends DatabaseTestCase
 
 **CSV**
 
-CSV datasets are slightly different in structure than XML and YAML datasets, as you must load each table individually, 
+CSV datasets are slightly different in structure than XML and YAML datasets, as you must load each table individually 
 with the data for each table contained in a separate file.  Maintaining the datasets this way, however, is much easier
 if you are extracting the test data from an existing database, as the data dumps can be configured per file to match this
 format.
