@@ -6,7 +6,7 @@
       <div class="footer-col  footer-col-1">
         <ul class="contact-list">
           <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
-          <li>Copyright &copy; 2015 {{ site.title }}</li>
+          <li>Copyright &copy; {{ site.time | date: '%y' }} {{ site.title }}</li>
         </ul>
 
         <div class="rss-subscribe">
