@@ -222,20 +222,30 @@ use DatabaseTesting\Db\MysqlAdapter;
 
 abstract class DatabaseTestCase extends \PHPUnit_Extensions_Database_TestCase
 {
+    // only instantiate adapter once per test
+    static private $adapter = null;
+
     // only instantiate pdo once for test clean-up/fixture load
     static private $pdo = null;
 
     // only instantiate PHPUnit_Extensions_Database_DB_IDatabaseConnection once per test
     private $conn = null;
 
+    final public function getAdapter()
+    {
+        if (self::$adapter == null) {
+            self::$adapter = new MysqlAdapter( $GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWD'] );
+        }
+
+        return self::$adapter;
+    }
+
     final public function getConnection()
     {
-        if( $this->conn === null )
-        {
-            if( self::$pdo == null )
-            {
-                $dbAdapter = new MysqlAdapter( $GLOBALS[ 'DB_USER' ], $GLOBALS[ 'DB_PASSWD' ], $GLOBALS[ 'DB_DBNAME' ], $GLOBALS[ 'DB_HOST' ] );
-                self::$pdo = $dbAdapter->getInstance();
+        if ($this->conn === null) {
+            if (self::$pdo == null) {
+                $dbAdapter = $this->getAdapter();
+                self::$pdo = $dbAdapter->getConnection();
             }
             $this->conn = $this->createDefaultDBConnection( self::$pdo );
         }
@@ -466,4 +476,166 @@ class BookMapperTest extends DatabaseTestCase
 
 # Writing The Tests
 
-[fill in]
+Finally, you can now write the tests for the BookMapper class.  Start with the first incomplete test function and work 
+your way down.
+
+{% highlight php %}
+<?php
+
+    public function testFetchAll()
+    {
+        $bookMapper = new BookMapper( $this->getAdapter() );
+        $allBooks   = $bookMapper->fetchAll();
+
+        //verify the number of books returned
+        $this->assertCount( 3, $allBooks );
+
+        //verify each item
+        /** @var \DatabaseTesting\Model\Book $book */
+        $book = $allBooks[0];
+        $this->assertEquals( 200, $book->getId() );
+        $this->assertEquals( '978-0671028473', $book->getIsbn() );
+        $this->assertEquals( 100, $book->getAuthorId() );
+        $this->assertEquals( 'Mordecai Richler', $book->getAuthorName() );
+        $this->assertEquals( 'The Apprenticeship of Duddy Kravitz', $book->getTitle() );
+
+        $book = $allBooks[1];
+        $this->assertEquals( 201, $book->getId() );
+        $this->assertEquals( '978-0887769252', $book->getIsbn() );
+        $this->assertEquals( 100, $book->getAuthorId() );
+        $this->assertEquals( 'Mordecai Richler', $book->getAuthorName() );
+        $this->assertEquals( 'Jacob Two-Two Meets the Hooded Fang', $book->getTitle() );
+
+        $book = $allBooks[2];
+        $this->assertEquals( 202, $book->getId() );
+        $this->assertEquals( '978-1550139891', $book->getIsbn() );
+        $this->assertEquals( 101, $book->getAuthorId() );
+        $this->assertEquals( 'Farley Mowat', $book->getAuthorName() );
+        $this->assertEquals( 'The Farfarers', $book->getTitle() );
+    }
+    
+{% endhighlight %}
+
+In this test, you should create a `$bookMapper` object, using the test adapter from the `DatabaseTestCase` class.  Call
+the `fetchAll()` function, and verify each of the expected properties in the resulting data against the values inserted in 
+the test datasets.
+
+Now if you execute the tests, you should see that there are 4 incomplete tests and one passing test:
+
+{% highlight bash %}
+fraser@localhost database-testing $ vendor/bin/phpunit
+PHPUnit 4.8.18 by Sebastian Bergmann and contributors.
+
+.IIII
+
+Time: 191 ms, Memory: 6.50Mb
+
+OK, but incomplete, skipped, or risky tests!
+Tests: 5, Assertions: 16, Incomplete: 4.
+{% endhighlight %}
+
+Continue filling in each of the remaining incomplete tests.
+
+{% highlight php %}
+<?php
+
+    public function testFetchByISBN()
+    {
+        $bookMapper = new BookMapper( $this->getAdapter() );
+
+        /** @var \DatabaseTesting\Model\Book $book */
+        $book = $bookMapper->fetchByISBN( '978-0887769252' );
+        $this->assertEquals( 201, $book->getId() );
+        $this->assertEquals( '978-0887769252', $book->getIsbn() );
+        $this->assertEquals( 100, $book->getAuthorId() );
+        $this->assertEquals( 'Mordecai Richler', $book->getAuthorName() );
+        $this->assertEquals( 'Jacob Two-Two Meets the Hooded Fang', $book->getTitle() );
+
+        //also verify a not-found request
+        $book = $bookMapper->fetchByISBN( '978-9999988888' );
+        $this->assertNull( $book );
+    }
+
+    public function testInsert()
+    {
+        //create a new book object
+        $newBook = new Book();
+        $newBook->setIsbn( '0-316-88179-1' );
+        $newBook->setAuthorId( 101 );
+        $newBook->setTitle( 'Never Cry Wolf' );
+
+        //insert the book into the database
+        $bookMapper = new BookMapper( $this->getAdapter() );
+        $bookMapper->insert( $newBook );
+
+        //fetch the book back using fetchByISBN
+        $fetchedBook = $bookMapper->fetchByISBN( '0-316-88179-1' );
+
+        //verify that the book fetched matches the book object
+        $this->assertNotNull( $fetchedBook->getId() );
+        $this->assertEquals( '0-316-88179-1', $fetchedBook->getIsbn() );
+        $this->assertEquals( 101, $fetchedBook->getAuthorId() );
+        $this->assertEquals( 'Farley Mowat', $fetchedBook->getAuthorName() );
+        $this->assertEquals( 'Never Cry Wolf', $fetchedBook->getTitle() );
+    }
+
+    public function testUpdate()
+    {
+        $bookMapper = new BookMapper( $this->getAdapter() );
+
+        //fetch a book from the database
+        /** @var \DatabaseTesting\Model\Book $book */
+        $book = $bookMapper->fetchByISBN( '978-0887769252' );
+        $this->assertEquals( 201, $book->getId() );
+        $this->assertEquals( '978-0887769252', $book->getIsbn() );
+        $this->assertEquals( 100, $book->getAuthorId() );
+        $this->assertEquals( 'Mordecai Richler', $book->getAuthorName() );
+        $this->assertEquals( 'Jacob Two-Two Meets the Hooded Fang', $book->getTitle() );
+
+        //update the object
+        $book->setAuthorId( 101 );
+        $book->setIsbn( '978-0-316-58633' );
+
+        //persist the record back to the database
+        $bookMapper->update( $book );
+
+        //fetch it back again
+        $fetchedBook = $bookMapper->fetchByISBN( '978-0-316-58633' );
+
+        //verify the book fetch matches the updated book object
+        $this->assertEquals( 201, $fetchedBook->getId() );
+        $this->assertEquals( '978-0-316-58633', $fetchedBook->getIsbn() );
+        $this->assertEquals( 101, $fetchedBook->getAuthorId() );
+        $this->assertEquals( 'Farley Mowat', $fetchedBook->getAuthorName() );
+        $this->assertEquals( 'Jacob Two-Two Meets the Hooded Fang', $fetchedBook->getTitle() );
+    }
+
+    public function testDelete()
+    {
+        $book = new Book();
+        $book->setId( 201 );
+
+        //delete a book from the database
+        $bookMapper = new BookMapper( $this->getAdapter() );
+        $bookMapper->delete( $book );
+
+        //ensure it cannot be fetched back
+        $fetchedBook = $bookMapper->fetchByISBN( '978-0887769252' );
+
+        $this->assertNull( $fetchedBook );
+    }
+        
+{% endhighlight %}
+
+Finally, run the full test suite to ensure all tests are passing.
+
+{% highlight bash %}
+fraser@localhost database-testing $ vendor/bin/phpunit
+PHPUnit 4.8.18 by Sebastian Bergmann and contributors.
+
+.....
+
+Time: 163 ms, Memory: 6.50Mb
+
+OK (5 tests, 38 assertions)
+{% endhighlight %}
