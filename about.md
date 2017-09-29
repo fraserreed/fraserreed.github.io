@@ -6,7 +6,7 @@ permalink: /about/
 
 
 My name is Fraser Reed and I live in Ottawa, Ontario, Canada.  I'm currently a software engineer at 
-[Intouch Insight Systems](https://www.intouchinsight.com) providing connected data capture and analytics solutions.
+[Intouch Insight Inc.](https://www.intouchinsight.com) providing connected data capture and analytics solutions.
 
 <a href="https://www.intouchinsight.com" target="_blank">
 	<img src="/css/logos/intouchinsight.png" height="60px" alt="Intouch Insight">
