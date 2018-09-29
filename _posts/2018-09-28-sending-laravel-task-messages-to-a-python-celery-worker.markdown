@@ -10,7 +10,7 @@ comments: true
 Do you have a [Laravel][laravel]{:target="_blank"} app or API, but want to run some type of advanced statistical analysis or 
 machine learning algorithms on your application data?  Python has many more options and built in libraries for developing 
 machine learning tools, so it may be helpful to set up a distributed system in which you can use your existing PHP 
-application in tandem with Python analytics workers.  This post will help you set up a [Python][python]{:target="_blank"} 
+application in tandem with message queue driven Python analytics workers.  This post will help you set up a [Python][python]{:target="_blank"} 
 worker using [Celery][celery]{:target="_blank"} and [Redis][redis]{:target="_blank"} and dispatch jobs from your Laravel 
 application to it.
 
@@ -69,7 +69,7 @@ should see a page that looks similar to this:
 
 ![initial tasks application](/css/images/post-assets/tasks-app-00-empty.png)
 
-# The Application
+# The application
 
 The application is a very basic one, using Laravel 5.7.  Running `docker-compose run artisan migrate` will have executed
 one database migration:  `2018_09_28_002236_tasks_table.php`.  The migration created a new database table `tasks`:
@@ -87,7 +87,7 @@ CREATE TABLE `tasks` (
 {% endhighlight %}
 
 We will use this table to create task messages for the Celery worker to run.  Keep in mind that the Celery worker doesn't
-actually read the tasks from this table - that's what Redis is used for.  The database is just being used in this blog
+actually read the tasks from this table - that's what the Redis message queue is used for.  The database is just being used in this blog
 post to show that both systems can connect to a shared database instance.
 
 Initially the table is empty, which the listing on `http://localhost` has shown.
@@ -119,7 +119,7 @@ We need PHP to be able to interact with Redis, so install the predis package as 
 composer require predis/predis
 {% endhighlight %}
 
-# Celery task dispatch code
+# Celery task dispatching
 
 To dispatch a Celery task from the PHP application, you first have to create a Celery client, as I did in `App\Jobs\AbstractCeleryTaskJob`:
 
@@ -213,9 +213,12 @@ message payload:
     ...
 {% endhighlight %}  
 
+The details of how messages are sent in this test application will be covered below, once the Python worker is ready.
+
 # Set up your Celery worker
 
-The next step is to set up the Python Celery worker so that any dispatched messages can be acted upon.  This will be done again using Docker.
+The next step is to set up the Python Celery worker so that any dispatched messages can be acted upon from the Redis queue.  
+This will be done again using Docker.
 
 First clone my [Python Celery worker Github repository][github-celery-repo]{:target="_blank"}.
 
@@ -247,7 +250,8 @@ When the container is successfully started, you should see streaming console mes
 
 ![celery worker started](/css/images/post-assets/celery-worker-started.png)
 
-If you created a test task above - you may even see the processed message!
+If you created a test task above - you may even see the processed message as the worker immediately reads it from the Redis 
+queue!
 
 # Celery worker application
 
@@ -352,6 +356,9 @@ in the  application, and you should also see log messages in the Celery docker c
 ![tasks application populated](/css/images/post-assets/tasks-app-02-populated.png)
 
 ![celery worker started](/css/images/post-assets/celery-worker-running.png)
+
+You are now free to extend the Python worker to do any types of data processing tasks you need for your usecase, without
+having to integrate the functionality into your existing Laravel application.
 
 [laravel]: https://laravel.com/
 [redis]: https://redis.io/
