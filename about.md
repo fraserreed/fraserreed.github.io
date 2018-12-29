@@ -5,11 +5,12 @@ permalink: /about/
 ---
 
 
-My name is Fraser Reed and I live in Ottawa, Ontario, Canada.  I'm currently Director of Product Solutions at 
-[Intouch Insight Inc.](https://www.intouchinsight.com) providing connected data capture and analytics solutions.
+My name is Fraser Reed and I live in Ottawa, Ontario, Canada.  I'm currently the Software Development Manager at 
+[Postmedia Network Inc.](https://www.postmedia.com/){:target="_blank"} where I lead technical architecture and development for sites used
+ to provide media content to readers across Canada and the world.
 
-<a href="https://www.intouchinsight.com" target="_blank">
-	<img src="/css/logos/intouchinsight.png" height="60px" alt="Intouch Insight">
+<a href="https://www.postmedia.com/" target="_blank">
+	<img src="/css/logos/postmedia.png" style="height: 60px; margin: 15px;" alt="Postmedia Network Inc.">
 </a>
 
 My expertise and interest lies in server-side technologies including PHP (including frameworks like Laravel, Zend 1/2 and Slim), Python,
