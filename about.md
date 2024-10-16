@@ -7,9 +7,9 @@ redirect_from:
 ---
 
 
-My name is Fraser Reed and I live in Ottawa, Ontario, Canada.  I'm currently the Software Development Manager at
-[Neptune Retail Solutions](https://www.neptuneretailsolutions.com/){:target="_blank"} where I lead the engineering team
-for our omni-channel marketing API, used by our customers to create and distribute cashback offers into our
+My name is Fraser Reed and I live in Ottawa, Ontario, Canada.  I currently lead the engineering team at
+[Neptune Retail Solutions](https://www.neptuneretailsolutions.com/){:target="_blank"}, an 
+omni-channel marketing platform.  Our customers use our APIs to create and distribute cashback offers into our
 network of retailer loyalty programs and 3rd party cashback apps.
 
 <a href="https://www.neptuneretailsolutions.com/" target="_blank">
